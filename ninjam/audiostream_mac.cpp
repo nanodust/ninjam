@@ -34,8 +34,8 @@
 
 static SPLPROC _splproc;
 
-#include </System/Library/Frameworks/CoreAudio.framework/Headers/AudioHardware.h>
 		
+#include </Users/alexhn/src/MacOSX-SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreAudio.framework/Versions/A/Headers/AudioHardware.h>
 
 class audioStreamer_CoreAudio  : public audioStreamer
 {
@@ -251,14 +251,14 @@ audioStreamer_CoreAudio::~audioStreamer_CoreAudio()
 		if (m_myDev_o != m_myDev_i)
 		{
 			AudioDeviceStop(m_myDev_i,caInproc);
-	                AudioDeviceRemoveIOProc(m_myDev_i,caInproc);
+	                AudioDeviceDestroyIOProcID(m_myDev_i,caInproc);
 			AudioDeviceStop(m_myDev_o,caOutproc);
-                	AudioDeviceRemoveIOProc(m_myDev_o,caOutproc);
+                	AudioDeviceDestroyIOProcID(m_myDev_o,caOutproc);
 		}
 		else
 		{
 			AudioDeviceStop(m_myDev_i,caIOproc);
-	                AudioDeviceRemoveIOProc(m_myDev_i,caIOproc);
+	                AudioDeviceDestroyIOProcID(m_myDev_i,caIOproc);
 		}
         }
          
@@ -271,6 +271,7 @@ int matchlen(const char *sub, const char *pa)
   while (*sub && *pa && toupper(*sub) == toupper(*pa)) { sub++; pa++; l++; }
   return l;
 }
+
 
 int audioStreamer_CoreAudio::Open(char **dev, int srate, int nch, int bps)
 {
@@ -294,7 +295,7 @@ int audioStreamer_CoreAudio::Open(char **dev, int srate, int nch, int bps)
         }
         AudioDeviceID *list=(AudioDeviceID *)malloc(sizeof(AudioDeviceID)*theNumberDevices);
         AudioHardwareGetProperty(kAudioHardwarePropertyDevices,&theSize,list);
-
+		# AudioDriverPlugInDeviceGetPropert
 
 again:
 
