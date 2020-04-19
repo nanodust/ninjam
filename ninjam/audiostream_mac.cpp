@@ -34,8 +34,8 @@
 
 static SPLPROC _splproc;
 
-		
-#include </Users/alexhn/src/MacOSX-SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreAudio.framework/Versions/A/Headers/AudioHardware.h>
+// large API changes - headers via https://github.com/RustAudio/coreaudio-sys/issues/21
+#include </MacOSX-SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreAudio.framework/Versions/A/Headers/AudioHardware.h>
 
 class audioStreamer_CoreAudio  : public audioStreamer
 {
